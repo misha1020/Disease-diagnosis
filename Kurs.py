@@ -32,7 +32,7 @@ def Turn(img, val):
 
 
 def Blur(img):
-    blurGaus = cv2.GaussianBlur(img, (7, 7), 0) 
+    blurGaus = cv2.GaussianBlur(img, (9, 9), 0) 
     
     '''
     kernel = np.ones((5,5),np.float32)/25
@@ -72,6 +72,21 @@ def Binary(img):
     #cv2.imwrite('testbin.jpg',thGlobal)
     return thGlobal
 
+def Canny(img):
+    
+    edges = cv2.Canny(img,100,200)
+
+    '''
+    plt.subplot(121),plt.imshow(img,cmap = 'gray')
+    plt.title('Original Image'), plt.xticks([]), plt.yticks([])
+    plt.subplot(122),plt.imshow(edges,cmap = 'gray')
+    plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
+
+    plt.show()
+    '''
+
+    return edges
+
 
 def Square(im, min_size=256, fill_color=(0, 0, 0, 0)):
     x, y = im.size
@@ -93,18 +108,25 @@ def Squeeze(img, size):
     return img
 
 def main():
-    in_img = "test.jpg"
-    #image = cv2.imread(in_img)                   
-    image = Image.open(in_img)                  # load image
-    image = Square(image)
-    image = Squeeze(image, 1600)
-    image = ConverPILtoOpenCV(image)
-    image = Turn(image, 180)
-    image = Blur(image)
-    image = Binary(image)
-    cv2.imwrite('output.jpg',image)              # save image
-    #cv2.imshow("Rotated image", image)          # show image
-    #cv2.waitKey(0)                              # readkey
-    #cv2.destroyAllWindows()                     # press enter to close all windows
+    in_img = "testIN.jpg"
+    imageInput = Image.open(in_img)                  # load image
+    k = 0
+    for i in range(4):
+        image = imageInput.copy()           
+        image = Square(image)
+        #image = Squeeze(image, 1600)
+        image = ConverPILtoOpenCV(image)
+        image = Turn(image, k)
+        image = Blur(image)
+        image = Binary(image)
+        image = Canny(image)
+        cv2.imwrite("test" + str(k) + ".jpg", image)              # save image
+        k += 90
+        #cv2.imshow("Rotated image", image)          # show image
+        #cv2.waitKey(0)                              # readkey
+        #cv2.destroyAllWindows()                     # press enter to close all windows
 
 main()
+
+
+#image = cv2.imread(in_img) 
