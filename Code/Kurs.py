@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import os 
 from PIL import Image
 from matplotlib import pyplot as plt
 
@@ -107,26 +108,44 @@ def Squeeze(img, size):
     img = img.resize((size,hsize), Image.ANTIALIAS)
     return img
 
-def main():
-    in_img = "testIN.jpg"
-    imageInput = Image.open(in_img)                  # load image
-    k = 0
-    for i in range(4):
-        image = imageInput.copy()           
-        image = Square(image)
-        #image = Squeeze(image, 1600)
-        image = ConverPILtoOpenCV(image)
-        image = Turn(image, k)
-        image = Blur(image)
-        image = Binary(image)
-        image = Canny(image)
-        cv2.imwrite("test" + str(k) + ".jpg", image)              # save image
-        k += 90
-        #cv2.imshow("Rotated image", image)          # show image
-        #cv2.waitKey(0)                              # readkey
-        #cv2.destroyAllWindows()                     # press enter to close all windows
+def Capitalize(myStr):
+    return myStr.upper()
 
+def LoadFilesNamesFromDir(dir):
+    files = os.listdir(dir)
+    for i, file in enumerate(files):
+        splited = file.split(".")
+        splited[1] = Capitalize(splited[1])
+        file = splited[0] + "." + splited[1]
+        files[i] = file
+    imgNames = filter(lambda x: x.endswith(".PNG") or x.endswith(".BMP") or x.endswith(".JPG") or x.endswith(".JPEG"), files)
+
+    return imgNames
+
+def main():
+    directory = "../Images"
+    imagesNames = LoadFilesNamesFromDir(directory)
+    for imageName in imagesNames:
+        print(imageName)
+        k = 0
+        imageInput = Image.open(directory + "/" + imageName)
+        for i in range(1):
+            image = imageInput.copy()           
+            image = Square(image)
+            #image = Squeeze(image, 1600)
+            image = ConverPILtoOpenCV(image)
+            image = Turn(image, k)
+            image = Blur(image)
+            image = Binary(image)
+            image = Canny(image)
+            splited = imageName.split(".")
+            imageName = splited[0]
+            cv2.imwrite("../Converted Images/Converted_" + imageName + "_" + str(k) + "_9x9.JPG", image)              # save image
+            k += 90
 main()
 
 
-#image = cv2.imread(in_img) 
+#image = cv2.imread(in_img)                  # load image CV
+#cv2.imshow("Rotated image", image)          # show image
+#cv2.waitKey(0)                              # readkey
+#cv2.destroyAllWindows()                     # press enter to close all windows
