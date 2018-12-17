@@ -129,7 +129,7 @@ def main():
         print(imageName)
         k = 0
         imageInput = Image.open(directory + "/" + imageName)
-        for i in range(1):
+        while (k < 360):
             image = imageInput.copy()           
             image = Square(image)
             #image = Squeeze(image, 1600)
@@ -140,8 +140,8 @@ def main():
             image = Canny(image)
             splited = imageName.split(".")
             imageName = splited[0]
-            cv2.imwrite("../Converted Images/Converted_" + imageName + "_" + str(k) + "_9x9.JPG", image)              # save image
-            k += 90
+            cv2.imwrite("../Converted Images/Converted_" + imageName + "_" + str(k) + ".JPG", image)              # save image
+            k += 360
 main()
 
 
