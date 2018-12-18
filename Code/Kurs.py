@@ -1,6 +1,6 @@
 import cv2
-import numpy as np
-import os 
+import numpy as np 
+import os
 from PIL import Image
 from matplotlib import pyplot as plt
 
@@ -8,7 +8,6 @@ from matplotlib import pyplot as plt
 def Turn(img, val):
     (h, w) = img.shape[:2]
     center = (w / 2, h / 2)
-    
     '''
     M = cv2.getRotationMatrix2D(center, 90, 1.0)
     tur90 = cv2.warpAffine(img, M, (w, h))
@@ -27,14 +26,11 @@ def Turn(img, val):
 
     M = cv2.getRotationMatrix2D(center, val, 1.0)
     rotated = cv2.warpAffine(img, M, (w, h))
-
-    #cv2.imwrite('testrotated.jpg',rotated)
     return rotated
 
 
 def Blur(img):
-    blurGaus = cv2.GaussianBlur(img, (9, 9), 0) 
-    
+    blurGaus = cv2.GaussianBlur(img, (5, 5), 0) 
     '''
     kernel = np.ones((5,5),np.float32)/25
     blur2DConv = cv2.filter2D(img,-1,kernel)
@@ -49,34 +45,41 @@ def Blur(img):
         plt.xticks([]),plt.yticks([])
     plt.show()
     '''
-
-    #cv2.imwrite('testblur.jpg',blurGaus)
     return blurGaus
-
 
 def Binary(img):
     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    ret, thGlobal = cv2.threshold(imgGray, 165, 255, cv2.THRESH_BINARY)
-
+    retGl, thGlobal = cv2.threshold(imgGray, 165, 255, cv2.THRESH_BINARY)
     '''
-    thAdaptMean = cv2.adaptiveThreshold(imgGray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
+    imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    ret, thGlobal = cv2.threshold(imgGray, 165, 255, cv2.THRESH_BINARY)
+    ret, thBinInv = cv2.threshold(imgGray, 165, 255, cv2.THRESH_BINARY_INV)
+    ret, thTrunc = cv2.threshold(imgGray, 165, 255, cv2.THRESH_TRUNC)
+    ret, thTozero = cv2.threshold(imgGray, 165, 255, cv2.THRESH_TOZERO)    
+    ret, thTozeroInv = cv2.threshold(imgGray, 165, 255, cv2.THRESH_TOZERO_INV)
+    titles = ['Original Image','BINARY','BINARY_INV','TRUNC','TOZERO','TOZERO_INV']
+    images = [imgGray, thGlobal, thTrunc, thTrunc, thTozero, thTozeroInv]
+    for i in range(6):
+        plt.subplot(2,3,i+1),plt.imshow(images[i],'gray')
+        plt.title(titles[i])
+        plt.xticks([]),plt.yticks([])    
+    
     thAdaptGaus = cv2.adaptiveThreshold(imgGray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 2)
-    titles = ['Original Image', 'Global Thresholding (v = 165)', 'Adaptive Mean Thresholding', 'Adaptive Gaussian Thresholding']
-    images = [imgGray, thGlobal, thAdaptMean, thAdaptGaus]
+    retOt, thOtsuBin = cv2.threshold(imgGray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    titles = ['Original Image', 'Global Thresholding (v = 165)', 'Adaptive Gaussian Thresholding', 'Otsu’s Binarization']
+    images = [imgGray, thGlobal, thAdaptGaus, thOtsuBin]
     for i in range(4):
         plt.subplot(2,2,i+1),plt.imshow(images[i], 'gray')
         plt.title(titles[i])
         plt.xticks([]),plt.yticks([])
+    
     plt.show()
     '''
-
-    #cv2.imwrite('testbin.jpg',thGlobal)
     return thGlobal
 
-def Canny(img):
-    
-    edges = cv2.Canny(img,100,200)
 
+def Canny(img):
+    edges = cv2.Canny(img,100,200)
     '''
     plt.subplot(121),plt.imshow(img,cmap = 'gray')
     plt.title('Original Image'), plt.xticks([]), plt.yticks([])
@@ -85,11 +88,10 @@ def Canny(img):
 
     plt.show()
     '''
-
     return edges
 
 
-def Square(im, min_size=256, fill_color=(0, 0, 0, 0)):
+def Square(im, min_size = 256, fill_color = (0, 0, 0)):
     x, y = im.size
     size = max(min_size, x, y)
     new_im = Image.new('RGBA', (size, size), fill_color)
