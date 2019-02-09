@@ -45,8 +45,7 @@ model.compile(loss = "categorical_crossentropy", optimizer = "adam", metrics = [
 #print(model.summary())
 
 model.fit(X_train, Y_train, batch_size = 200, epochs = 1, validation_split = 0.2, verbose = 2)
-#model.save('my_model.h5')
-model.save_weights('my_model_weights.h5')
+model.save('model_Nums.h5')
 
 scores = model.evaluate(X_test, Y_test, verbose = 0)
 print("Точность работы на тестовых данных: %.2f%%" % (scores[1] * 100))
