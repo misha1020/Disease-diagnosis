@@ -17,13 +17,24 @@ input_shape = (img_width, img_height, 3)
 # Количество эпох
 epochs = 10
 # Размер мини-выборки
-batch_size = 1
+batch_size = 3
+
+test_data_portion = 0.15
+# Часть набора данных для проверки
+val_data_portion = 0.15
+# Количество элементов данных в одном классе
+nb_images = 100
+
+nb_train_samples = int(nb_images * (1 - val_data_portion - test_data_portion))
+nb_validation_samples = int(nb_images * val_data_portion)
+nb_test_samples = int(nb_images * test_data_portion)
+
 # Количество изображений для обучения
-nb_train_samples = 15
+#nb_train_samples = 15
 # Количество изображений для проверки
-nb_validation_samples = 5
+#nb_validation_samples = 5
 # Количество изображений для тестирования
-nb_test_samples = 5
+#nb_test_samples = 5
 
 model = Sequential()
 model.add(Conv2D(32, (3, 3), input_shape=input_shape))
@@ -76,7 +87,7 @@ model.fit_generator(
     validation_data=val_generator,
     validation_steps=nb_validation_samples // batch_size)
 
-model.save('model_MyData.h5')
+model.save('MyData_Model.h5')
 
 scores = model.evaluate_generator(test_generator, nb_test_samples // batch_size)
 print("Аккуратность на тестовых данных: %.2f%%" % (scores[1]*100))
