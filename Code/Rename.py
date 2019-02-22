@@ -14,10 +14,10 @@ def LoadFilesNamesFromDir(dir):
     imgNames = filter(lambda x: x.endswith(".PNG") or x.endswith(".BMP") or x.endswith(".JPG") or x.endswith(".JPEG"), files)
     return imgNames
 
-direc = "../MakeOnco/"
+direc = "../MakeNotOnco/"
 imgs = LoadFilesNamesFromDir(direc)
 i = 0
 for Image in imgs:
-    os.rename(direc + Image, direc + "Onco_" + str(i) + ".JPG")
+    #os.rename(direc + Image, direc + "Onco_" + str(i) + ".JPG")
+    os.rename(direc + Image, direc + 'NotOnco_' + str(i) + ".JPG")
     i += 1
-    #os.rename(direc + Image, direc + 'NotOnco_' + Image)

@@ -115,35 +115,36 @@ def Capitalize(myStr):
 
 def LoadFilesNamesFromDir(dir):
     files = os.listdir(dir)
-    for i, file in enumerate(files):
-        splited = file.split(".")
-        splited[1] = Capitalize(splited[1])
-        file = splited[0] + "." + splited[1]
-        files[i] = file
-    imgNames = filter(lambda x: x.endswith(".PNG") or x.endswith(".BMP") or x.endswith(".JPG") or x.endswith(".JPEG"), files)
-
-    return imgNames
+    #for i, file in enumerate(files):
+    #    splited = file.split(".")
+    #    splited[1] = Capitalize(splited[1])
+    #    file = splited[0] + "." + splited[1]
+    #    files[i] = file
+    #imgNames = filter(lambda x: x.endswith(".PNG") or x.endswith(".BMP") or x.endswith(".JPG") or x.endswith(".JPEG"), files)
+    #return imgNames
+    return files
 
 def main():
-    directory = "../Images"
+    directory = "../Less"
     imagesNames = LoadFilesNamesFromDir(directory)
     for imageName in imagesNames:
-        print(imageName)
-        k = 0
-        imageInput = Image.open(directory + "/" + imageName)
-        while (k < 360):
-            image = imageInput.copy()           
-            image = Square(image)
-            #image = Squeeze(image, 1600)
-            image = ConverPILtoOpenCV(image)
-            image = Turn(image, k)
-            image = Blur(image)
-            image = Binary(image)
-            image = Canny(image)
-            splited = imageName.split(".")
-            imageName = splited[0]
-            cv2.imwrite("../Converted Images/Converted_" + imageName + "_" + str(k) + ".JPG", image)              # save image
-            k += 360
+        #print(imageName)
+        #k = 0
+        #imageInput = Image.open(directory + "/" + imageName)
+        #while (k < 360):
+        #image = imageInput.copy()           
+        #image = Square(image)
+        #image = Squeeze(image, 1600)
+        #image = ConverPILtoOpenCV(image)
+        #image = Turn(image, k)
+        image = cv2.imread(directory + "/" + imageName) 
+        image = Blur(image)
+        image = Binary(image)
+        #image = Canny(image)
+        splited = imageName.split(".")
+        imageName = splited[0]
+        cv2.imwrite("../Less Bin/" + imageName + ".JPG", image)              # save image
+        #k += 360
 main()
 
 

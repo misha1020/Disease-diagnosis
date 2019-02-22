@@ -1,9 +1,11 @@
 import shutil
 import os
 import numpy as np 
+from PIL import Image
+import cv2
 
 # Каталог с набором данных
-data_dir = "../VseImages"
+data_dir = "../Less Bin"
 # Каталог с данными для обучения
 train_dir = "../Images/train"
 # Каталог с данными для проверки
@@ -30,9 +32,9 @@ create_directory(test_dir)
 
 def copy_images(start_index, end_index, source_dir, dest_dir):
     for i in range(start_index, end_index):
-        shutil.copy2(os.path.join(source_dir, "Onco_" + str(i) + ".jpg"), 
+        shutil.copy(os.path.join(source_dir, "Onco_" + str(i) + ".jpg"),
                     os.path.join(dest_dir, "Onco"))
-        shutil.copy2(os.path.join(source_dir, "NotOnco_" + str(i) + ".jpg"), 
+        shutil.copy(os.path.join(source_dir, "NotOnco_" + str(i) + ".jpg"), 
                    os.path.join(dest_dir, "NotOnco"))
 
 start_val_data_idx = int(nb_images * (1 - val_data_portion - test_data_portion))
