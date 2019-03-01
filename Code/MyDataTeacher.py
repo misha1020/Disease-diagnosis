@@ -15,42 +15,50 @@ img_width, img_height = 150, 150
 # backend Tensorflow, channels_last
 input_shape = (img_width, img_height, 3)
 # Количество эпох
-epochs = 20
+epochs = 10
 # Размер мини-выборки
-batch_size = 3
-
-test_data_portion = 0.20
-# Часть набора данных для проверки
-val_data_portion = 0.20
+batch_size = 1
 # Количество элементов данных в одном классе
-nb_images = 25
+nb_images = 68
 
-nb_train_samples = int(nb_images * (1 - val_data_portion - test_data_portion))
-nb_validation_samples = int(nb_images * val_data_portion)
-nb_test_samples = int(nb_images * test_data_portion)
+# Часть набора данных для тестирования
+test_data_portion = 0.25
+# Часть набора данных для проверки
+val_data_portion = 0.25
+# nb_train_samples = int(nb_images * (1 - val_data_portion - test_data_portion))
+# nb_validation_samples = int(nb_images * val_data_portion)
+# nb_test_samples = int(nb_images * test_data_portion)
 
-# Количество изображений для обучения
-#nb_train_samples = 15
-# Количество изображений для проверки
-#nb_validation_samples = 5
-# Количество изображений для тестирования
-#nb_test_samples = 5
+#Количество изображений для обучения
+nb_train_samples = 50
+#Количество изображений для проверки
+nb_validation_samples = 9
+#Количество изображений для тестирования
+nb_test_samples = 9
 
 model = Sequential()
-model.add(Conv2D(150, (7, 7), input_shape=input_shape))
+model.add(Conv2D(64, (3, 3), input_shape=input_shape))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Conv2D(150, (6, 6)))
+model.add(Conv2D(64, (3, 3), input_shape=input_shape))
 model.add(Activation('relu'))
-model.add(MaxPooling2D(pool_size=(4, 4)))
+model.add(MaxPooling2D(pool_size=(2, 2)))
 
-model.add(Conv2D(150, (8, 8)))
+model.add(Conv2D(32, (3, 3), input_shape=input_shape))
+model.add(Activation('relu'))
+model.add(MaxPooling2D(pool_size=(2, 2)))
+
+model.add(Conv2D(32, (3, 3), input_shape=input_shape))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 
 model.add(Flatten())
-model.add(Dense(150))
+model.add(Dense(128))
+model.add(Activation('relu'))
+model.add(Dense(128))
+model.add(Activation('relu'))
+model.add(Dense(128))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
 model.add(Dense(1))
@@ -87,7 +95,7 @@ model.fit_generator(
     validation_data=val_generator,
     validation_steps=nb_validation_samples // batch_size)
 
-model.save('MyData_Model_Bin1.h5')
+model.save('MyData_Model_Bin68.h5')
 
 scores = model.evaluate_generator(test_generator, nb_test_samples // batch_size)
 print("Аккуратность на тестовых данных: %.2f%%" % (scores[1]*100))

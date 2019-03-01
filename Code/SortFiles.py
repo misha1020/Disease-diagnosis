@@ -13,11 +13,11 @@ val_dir = "../Images/val"
 # Каталог с данными для тестирования
 test_dir = "../Images/test"
 # Часть набора данных для тестирования
-test_data_portion = 0.20
+test_data_portion = 0.25
 # Часть набора данных для проверки
-val_data_portion = 0.20
+val_data_portion = 0.25
 # Количество элементов данных в одном классе
-nb_images = 25
+nb_images = 68
 
 def create_directory(dir_name):
     if os.path.exists(dir_name):
@@ -37,8 +37,11 @@ def copy_images(start_index, end_index, source_dir, dest_dir):
         shutil.copy(os.path.join(source_dir, "NotOnco_" + str(i) + ".jpg"), 
                    os.path.join(dest_dir, "NotOnco"))
 
-start_val_data_idx = int(nb_images * (1 - val_data_portion - test_data_portion))
-start_test_data_idx = int(nb_images * (1 - test_data_portion))
+#start_val_data_idx = int(nb_images * (1 - val_data_portion - test_data_portion))
+start_val_data_idx = 50
+#start_test_data_idx = int(nb_images * (1 - test_data_portion))
+start_test_data_idx = 59
+
 print(start_val_data_idx)
 print(start_test_data_idx)
 

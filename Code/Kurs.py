@@ -115,20 +115,20 @@ def Capitalize(myStr):
 
 def LoadFilesNamesFromDir(dir):
     files = os.listdir(dir)
-    #for i, file in enumerate(files):
-    #    splited = file.split(".")
-    #    splited[1] = Capitalize(splited[1])
-    #    file = splited[0] + "." + splited[1]
-    #    files[i] = file
-    #imgNames = filter(lambda x: x.endswith(".PNG") or x.endswith(".BMP") or x.endswith(".JPG") or x.endswith(".JPEG"), files)
-    #return imgNames
-    return files
+    for i, file in enumerate(files):
+        splited = file.split(".")
+        splited[1] = Capitalize(splited[1])
+        file = splited[0] + "." + splited[1]
+        files[i] = file
+    imgNames = filter(lambda x: x.endswith(".PNG") or x.endswith(".BMP") or x.endswith(".JPG") or x.endswith(".JPEG"), files)
+    return imgNames
+    #return files
 
 def main():
-    directory = "../Less"
+    directory = "../All Images"
     imagesNames = LoadFilesNamesFromDir(directory)
     for imageName in imagesNames:
-        #print(imageName)
+        print(imageName)
         #k = 0
         #imageInput = Image.open(directory + "/" + imageName)
         #while (k < 360):
@@ -143,7 +143,7 @@ def main():
         #image = Canny(image)
         splited = imageName.split(".")
         imageName = splited[0]
-        cv2.imwrite("../Less Bin/" + imageName + ".JPG", image)              # save image
+        cv2.imwrite("../Test/" + imageName + ".JPG", image)              # save image
         #k += 360
 main()
 
