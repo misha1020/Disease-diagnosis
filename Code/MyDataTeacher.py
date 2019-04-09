@@ -2,6 +2,8 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D
 from keras.layers import Activation, Dropout, Flatten, Dense
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 # Каталог с данными для обучения
 train_dir = '../Images/train'
@@ -15,26 +17,24 @@ img_width, img_height = 150, 150
 # backend Tensorflow, channels_last
 input_shape = (img_width, img_height, 3)
 # Количество эпох
-epochs = 10
+epochs = 1
 # Размер мини-выборки
 batch_size = 1
 # Количество элементов данных в одном классе
-nb_images = 68
+nb_images = 200
 
 # Часть набора данных для тестирования
-test_data_portion = 0.25
+test_data_portion = 0.20
 # Часть набора данных для проверки
-val_data_portion = 0.25
-# nb_train_samples = int(nb_images * (1 - val_data_portion - test_data_portion))
-# nb_validation_samples = int(nb_images * val_data_portion)
-# nb_test_samples = int(nb_images * test_data_portion)
+val_data_portion = 0.20
 
-#Количество изображений для обучения
-nb_train_samples = 50
-#Количество изображений для проверки
-nb_validation_samples = 9
-#Количество изображений для тестирования
-nb_test_samples = 9
+nb_train_samples = int(nb_images * (1 - val_data_portion - test_data_portion))
+nb_validation_samples = int(nb_images * val_data_portion)
+nb_test_samples = int(nb_images * test_data_portion)
+
+#nb_train_samples = 50
+#nb_validation_samples = 9
+#nb_test_samples = 9
 
 model = Sequential()
 model.add(Conv2D(64, (3, 3), input_shape=input_shape))
@@ -95,7 +95,7 @@ model.fit_generator(
     validation_data=val_generator,
     validation_steps=nb_validation_samples // batch_size)
 
-model.save('MyData_Model_Bin68.h5')
+model.save('MyData_Model_Bin25x800x45x1x1.h5')
 
 scores = model.evaluate_generator(test_generator, nb_test_samples // batch_size)
 print("Аккуратность на тестовых данных: %.2f%%" % (scores[1]*100))

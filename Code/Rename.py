@@ -14,7 +14,7 @@ def LoadFilesNamesFromDir(dir):
     imgNames = filter(lambda x: x.endswith(".PNG") or x.endswith(".BMP") or x.endswith(".JPG") or x.endswith(".JPEG"), files)
     return imgNames
 
-direc = "../Make Onco/"
+direc = "../Make Not Onco/"
 imgs = LoadFilesNamesFromDir(direc)
 
 if (direc == "../Make Onco/"):

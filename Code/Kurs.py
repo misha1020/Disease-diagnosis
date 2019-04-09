@@ -122,29 +122,28 @@ def LoadFilesNamesFromDir(dir):
         files[i] = file
     imgNames = filter(lambda x: x.endswith(".PNG") or x.endswith(".BMP") or x.endswith(".JPG") or x.endswith(".JPEG"), files)
     return imgNames
-    #return files
 
 def main():
     directory = "../All Images"
     imagesNames = LoadFilesNamesFromDir(directory)
     for imageName in imagesNames:
         print(imageName)
-        #k = 0
-        #imageInput = Image.open(directory + "/" + imageName)
-        #while (k < 360):
-        #image = imageInput.copy()           
-        #image = Square(image)
-        #image = Squeeze(image, 1600)
-        #image = ConverPILtoOpenCV(image)
-        #image = Turn(image, k)
-        image = cv2.imread(directory + "/" + imageName) 
-        image = Blur(image)
-        image = Binary(image)
-        #image = Canny(image)
-        splited = imageName.split(".")
-        imageName = splited[0]
-        cv2.imwrite("../Test/" + imageName + ".JPG", image)              # save image
-        #k += 360
+        k = 0
+        imageInput = Image.open(directory + "/" + imageName)
+        while (k < 360):
+            image = imageInput.copy()           
+            image = Square(image)
+            #image = Squeeze(image, 1600)
+            image = ConverPILtoOpenCV(image)
+            image = Turn(image, k)
+            #image = cv2.imread(directory + "/" + imageName) 
+            image = Blur(image)
+            image = Binary(image)
+            image = Canny(image)
+            splited = imageName.split(".")
+            imageName = splited[0]
+            cv2.imwrite("../Test/" + imageName + "_" + str(k) + ".JPG", image)              # save image
+            k += 36
 main()
 
 

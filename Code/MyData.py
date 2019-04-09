@@ -26,7 +26,7 @@ def ConverPILtoOpenCV(pil_image):
     return opencv_image
 
 img_path = "../Test/" + sys.argv[1]
-img = image.load_img(img_path, target_size=(150, 150))
+img = image.load_img(img_path, target_size=(800, 800))
 #img = ConverPILtoOpenCV(img)
 #img = Blur(img)
 #img = Binary(img)
@@ -35,7 +35,7 @@ x = image.img_to_array(img)
 x /= 255
 x = np.expand_dims(x, axis=0)
 
-loaded_model = load_model('MyData_Model_Bin1.h5')
+loaded_model = load_model('MyData_Model_Bin25x800x45x5x3.h5')
 loaded_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
 prediction = loaded_model.predict(x)
