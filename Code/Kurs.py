@@ -25,7 +25,7 @@ def Turn(img, val):
     '''
 
     M = cv2.getRotationMatrix2D(center, val, 1.0)
-    rotated = cv2.warpAffine(img, M, (w, h))
+    rotated = cv2.warpAffine(img, M, (w, h), borderValue=(255,255,255))
     return rotated
 
 
@@ -91,7 +91,7 @@ def Canny(img):
     return edges
 
 
-def Square(im, min_size = 256, fill_color = (0, 0, 0)):
+def Square(im, min_size = 256, fill_color = (255, 255, 255)):
     x, y = im.size
     size = max(min_size, x, y)
     new_im = Image.new('RGBA', (size, size), fill_color)
@@ -124,7 +124,7 @@ def LoadFilesNamesFromDir(dir):
     return imgNames
 
 def main():
-    directory = "../All Images"
+    directory = "../Test"
     imagesNames = LoadFilesNamesFromDir(directory)
     for imageName in imagesNames:
         print(imageName)
@@ -133,17 +133,17 @@ def main():
         while (k < 360):
             image = imageInput.copy()           
             image = Square(image)
-            #image = Squeeze(image, 1600)
+            image = Squeeze(image, 128)
             image = ConverPILtoOpenCV(image)
-            image = Turn(image, k)
+            #image = Turn(image, k)
             #image = cv2.imread(directory + "/" + imageName) 
             image = Blur(image)
             image = Binary(image)
-            image = Canny(image)
+            #image = Canny(image)
             splited = imageName.split(".")
             imageName = splited[0]
             cv2.imwrite("../Test/" + imageName + "_" + str(k) + ".JPG", image)              # save image
-            k += 36
+            k += 360
 main()
 
 

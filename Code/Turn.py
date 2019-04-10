@@ -5,12 +5,13 @@ import numpy as np
 from PIL import Image
 
 def Blur(img):
-    blurGaus = cv2.GaussianBlur(img, (5, 5), 0) 
-    return blurGaus
+    #blurGaus = cv2.GaussianBlur(img, (5, 5), 0) 
+    blurBilFiltr = cv2.bilateralFilter(img, 9, 75, 75)
+    return blurBilFiltr
 
 def Binary(img):
     imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    retGl, thGlobal = cv2.threshold(imgGray, 165, 255, cv2.THRESH_BINARY)
+    retGl, thGlobal = cv2.threshold(imgGray, 175, 250, cv2.THRESH_BINARY)
     return thGlobal
 
 def Turn(img, val):
@@ -49,13 +50,13 @@ def main():
             while (k < 360):
                 image = imageInput.copy()           
                 image = Square(image)
-                image = Squeeze(image, 800)
+                image = Squeeze(image, 256)
                 image = ConverPILtoOpenCV(image)
                 image = Turn(image, k)
                 image = Blur(image)
                 image = Binary(image)
                 cv2.imwrite(splited[0] + "_" + str(k) + ".jpg", image)
-                k += 45
+                k += 20
             os.remove(filename)
 
 main()
