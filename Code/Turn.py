@@ -2,6 +2,7 @@ import os
 import cv2
 import glob
 import numpy as np 
+import scipy.misc as sm
 from PIL import Image
 
 def Blur(img):
@@ -46,17 +47,17 @@ def main():
             print(filename)
             imageInput = Image.open(filename) 
             splited = filename.split(".jpg")
+            imageInput = Square(imageInput)
+            imageInput = Squeeze(imageInput, 256)
+            imageInput = ConverPILtoOpenCV(imageInput)
+            imageInput = Blur(imageInput)
+            imageInput = Binary(imageInput)
             k = 0
             while (k < 360):
-                image = imageInput.copy()           
-                image = Square(image)
-                image = Squeeze(image, 256)
-                image = ConverPILtoOpenCV(image)
+                image = imageInput.copy() 
                 image = Turn(image, k)
-                image = Blur(image)
-                image = Binary(image)
                 cv2.imwrite(splited[0] + "_" + str(k) + ".jpg", image)
-                k += 20
+                k += 10
             os.remove(filename)
 
 main()
