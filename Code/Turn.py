@@ -6,7 +6,6 @@ import scipy.misc as sm
 from PIL import Image
 
 def Blur(img):
-    #blurGaus = cv2.GaussianBlur(img, (5, 5), 0) 
     blurBilFiltr = cv2.bilateralFilter(img, 9, 75, 75)
     return blurBilFiltr
 
@@ -29,10 +28,18 @@ def Square(im, min_size = 256, fill_color = (255, 255, 255)):
     new_im.paste(im, ((size - x) // 2, (size - y) // 2))
     return new_im
 
+'''
 def Squeeze(img, size):
     wpercent = (size/float(img.size[0]))
     hsize = int((float(img.size[1])*float(wpercent)))
     img = img.resize((size,hsize), Image.ANTIALIAS)
+    return img
+'''
+
+def Squeeze(img, size):
+    original_image = img
+    max_size = (size, size)
+    original_image.thumbnail(max_size, Image.ANTIALIAS)
     return img
 
 def ConverPILtoOpenCV(pil_image):
@@ -57,7 +64,7 @@ def main():
                 image = imageInput.copy() 
                 image = Turn(image, k)
                 cv2.imwrite(splited[0] + "_" + str(k) + ".jpg", image)
-                k += 10
+                k += 20
             os.remove(filename)
 
 main()
