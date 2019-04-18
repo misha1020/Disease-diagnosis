@@ -17,7 +17,7 @@ test_data_portion = 0.12
 # Часть набора данных для проверки
 val_data_portion = 0.12
 # Количество элементов данных в одном классе
-nb_images = 25
+nb_images = 24
 
 def create_directory(dir_name):
     if os.path.exists(dir_name):

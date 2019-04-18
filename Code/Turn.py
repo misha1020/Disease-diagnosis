@@ -55,7 +55,7 @@ def main():
             imageInput = Image.open(filename) 
             splited = filename.split(".jpg")
             imageInput = Square(imageInput)
-            imageInput = Squeeze(imageInput, 256)
+            #imageInput = Squeeze(imageInput, 512)
             imageInput = ConverPILtoOpenCV(imageInput)
             imageInput = Blur(imageInput)
             imageInput = Binary(imageInput)
@@ -64,7 +64,7 @@ def main():
                 image = imageInput.copy() 
                 image = Turn(image, k)
                 cv2.imwrite(splited[0] + "_" + str(k) + ".jpg", image)
-                k += 20
+                k += 9
             os.remove(filename)
 
 main()
