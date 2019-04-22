@@ -2,7 +2,7 @@ import os
 import cv2
 import glob
 import numpy as np 
-import scipy.misc as sm
+#import scipy.misc as sm
 from PIL import Image
 
 def Blur(img):
@@ -68,4 +68,3 @@ def main():
             os.remove(filename)
 
 main()
-           
