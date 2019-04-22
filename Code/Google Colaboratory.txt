@@ -5,3 +5,7 @@ drive.mount('/content/drive')
 
 !rm sample.jpg				// удалить файл
 !rm -rf <folder_name>			// удалить директорию
+
+
+from google.colab import files
+files.download('example.txt')

@@ -28,7 +28,7 @@ def Square(im, min_size = 128, fill_color = (255, 255, 255)):
     new_im.paste(im, ((size - x) // 2, (size - y) // 2))
     return new_im
 
-def ConverPILtoOpenCV(pil_image):
+def ConvertPILtoOpenCV(pil_image):
     numpy_image = np.array(pil_image)  
     opencv_image = cv2.cvtColor(numpy_image, cv2.COLOR_RGB2BGR) 
     return opencv_image
@@ -36,27 +36,26 @@ def ConverPILtoOpenCV(pil_image):
 def main():
     filename = "../Test/" + sys.argv[1]
 
-    '''
+    
     print(filename)
     splited = filename.split(".jpg")
     imageInput = Image.open(filename) 
     #splited = filename.split(".jpg")
     imageInput = Square(imageInput)
-    imageInput = ConverPILtoOpenCV(imageInput)
+    imageInput = ConvertPILtoOpenCV(imageInput)
     imageInput = Blur(imageInput)
     imageInput = Binary(imageInput)
-    
+
     os.remove(filename)
     cv2.imwrite(splited[0] + ".jpg", imageInput)
-    '''
 
-    img = image.load_img(filename, target_size=(256, 256))
+    img = image.load_img(filename, target_size=(128, 128))
 
     x = image.img_to_array(img)
     x /= 255
     x = np.expand_dims(x, axis=0)
 
-    loaded_model = load_model('Model_Univ_3.h5')
+    loaded_model = load_model('Model_Try_128_25_16_960.h5')
     loaded_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
     prediction = loaded_model.predict(x)
