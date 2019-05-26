@@ -1,8 +1,7 @@
 import os
 import cv2
 import glob
-import numpy as np 
-#import scipy.misc as sm
+import numpy as np
 from PIL import Image
 
 def Blur(img):
@@ -27,15 +26,7 @@ def Square(im, min_size = 256, fill_color = (255, 255, 255)):
     new_im = Image.new('RGBA', (size, size), fill_color)
     new_im.paste(im, ((size - x) // 2, (size - y) // 2))
     return new_im
-
-'''
-def Squeeze(img, size):
-    wpercent = (size/float(img.size[0]))
-    hsize = int((float(img.size[1])*float(wpercent)))
-    img = img.resize((size,hsize), Image.ANTIALIAS)
-    return img
-'''
-
+    
 def Squeeze(img, size):
     original_image = img
     max_size = (size, size)
@@ -48,14 +39,14 @@ def ConverPILtoOpenCV(pil_image):
     return opencv_image
 
 def main():
-    directory = "../Images"
+    directory = "../Images 299"
     for dir in ([x[0] for x in os.walk(directory)]):
         for filename in glob.glob(dir + "/*.jpg"):
             print(filename)
             imageInput = Image.open(filename) 
             splited = filename.split(".jpg")
             imageInput = Square(imageInput)
-            #imageInput = Squeeze(imageInput, 512)
+            imageInput = Squeeze(imageInput, 299)
             imageInput = ConverPILtoOpenCV(imageInput)
             imageInput = Blur(imageInput)
             imageInput = Binary(imageInput)

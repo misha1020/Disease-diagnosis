@@ -5,6 +5,8 @@ import cv2
 from keras.preprocessing import image
 from keras.models import load_model
 from PIL import Image
+from keras.models import model_from_json
+from keras import optimizers
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
@@ -28,38 +30,49 @@ def Square(im, min_size = 128, fill_color = (255, 255, 255)):
     new_im.paste(im, ((size - x) // 2, (size - y) // 2))
     return new_im
 
+def Squeeze(img, size):
+    original_image = img
+    max_size = (size, size)
+    original_image.thumbnail(max_size, Image.ANTIALIAS)
+    return img
+
 def ConvertPILtoOpenCV(pil_image):
     numpy_image = np.array(pil_image)  
     opencv_image = cv2.cvtColor(numpy_image, cv2.COLOR_RGB2BGR) 
     return opencv_image
 
 def main():
-    filename = "../Test/" + sys.argv[1]
+    dirname = "../All Images Mixed/"   
+    #filename = dirname + sys.argv[1]
+    k = 0
+    while (k < 35):
+        filename = dirname + 'NotOnco_' + str(k) + '.jpg' 
+        print(filename)
+        k += 1
 
+        splited = filename.split(".jpg")
+        imageInput = Image.open(filename)
+        imageInput = Square(imageInput)
+        imageInput = Squeeze(imageInput, 299)
+        imageInput = ConvertPILtoOpenCV(imageInput)
+        imageInput = Blur(imageInput)
+        imageInput = Binary(imageInput)
+
+        filename = splited[0] + "Bin.jpg"
+        cv2.imwrite(filename, imageInput)
+
+        img = image.load_img(filename, target_size=(299, 299))
+
+        x = image.img_to_array(img)
+        x /= 255
+        x = np.expand_dims(x, axis=0)
+
+        loaded_model = load_model('299_1.h5')
     
-    print(filename)
-    splited = filename.split(".jpg")
-    imageInput = Image.open(filename) 
-    #splited = filename.split(".jpg")
-    imageInput = Square(imageInput)
-    imageInput = ConvertPILtoOpenCV(imageInput)
-    imageInput = Blur(imageInput)
-    imageInput = Binary(imageInput)
-
-    os.remove(filename)
-    cv2.imwrite(splited[0] + ".jpg", imageInput)
-
-    img = image.load_img(filename, target_size=(128, 128))
-
-    x = image.img_to_array(img)
-    x /= 255
-    x = np.expand_dims(x, axis=0)
-
-    loaded_model = load_model('Model_Try_128_25_16_960.h5')
-    loaded_model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-
-    prediction = loaded_model.predict(x)
-    classes=['Онкология', 'Не онкология']
-    print(classes[np.argmax(prediction)])
-
+        prediction = loaded_model.predict(x)
+        os.remove(filename)
+        print(prediction)
+        classes=['Не онкология', 'Онкология']
+        print(classes[round(float(prediction[[0]]))])
+    
 main()
