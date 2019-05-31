@@ -42,10 +42,11 @@ def ConvertPILtoOpenCV(pil_image):
     return opencv_image
 
 def main():
-    dirname = "../All Images Mixed/"   
+    dirname = "../All Images (58x2)/"   
+    loaded_model = load_model('NewModel15.h5')
     #filename = dirname + sys.argv[1]
     k = 0
-    while (k < 35):
+    while (k < 57):
         filename = dirname + 'NotOnco_' + str(k) + '.jpg' 
         print(filename)
         k += 1
@@ -53,7 +54,7 @@ def main():
         splited = filename.split(".jpg")
         imageInput = Image.open(filename)
         imageInput = Square(imageInput)
-        imageInput = Squeeze(imageInput, 299)
+        #imageInput = Squeeze(imageInput, 128)
         imageInput = ConvertPILtoOpenCV(imageInput)
         imageInput = Blur(imageInput)
         imageInput = Binary(imageInput)
@@ -61,13 +62,11 @@ def main():
         filename = splited[0] + "Bin.jpg"
         cv2.imwrite(filename, imageInput)
 
-        img = image.load_img(filename, target_size=(299, 299))
+        img = image.load_img(filename, target_size=(128, 128))
 
         x = image.img_to_array(img)
         x /= 255
         x = np.expand_dims(x, axis=0)
-
-        loaded_model = load_model('299_1.h5')
     
         prediction = loaded_model.predict(x)
         os.remove(filename)

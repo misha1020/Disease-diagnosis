@@ -5,13 +5,13 @@ from PIL import Image
 import cv2
 
 # Каталог с набором данных
-data_dir = "../All Images Mixed"
+data_dir = "../All Images Final"
 # Каталог с данными для обучения
-train_dir = "../Images/train"
+train_dir = "../Images Final/train"
 # Каталог с данными для проверки
-val_dir = "../Images/val"
+val_dir = "../Images Final/val"
 # Каталог с данными для тестирования
-test_dir = "../Images/test"
+test_dir = "../Images Final/test"
 # Часть набора данных для тестирования
 test_data_portion = 0.14
 # Часть набора данных для проверки
