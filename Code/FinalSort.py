@@ -4,9 +4,9 @@ import numpy as np
 from PIL import Image
 import cv2
 
-data_dir = "../All Images Mixed"
-train_dir = "../Images 299/train"
-val_dir = "../Images 299/val"
+data_dir = "../All Images Final"
+train_dir = "../Images Train Val/train"
+val_dir = "../Images Train Val/val"
 val_data_portion = 0.2
 
 nb_images = 35

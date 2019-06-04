@@ -39,14 +39,13 @@ def ConverPILtoOpenCV(pil_image):
     return opencv_image
 
 def main():
-    directory = "../Images Final"
+    directory = "../Images Train Val"
     for dir in ([x[0] for x in os.walk(directory)]):
         for filename in glob.glob(dir + "/*.jpg"):
             print(filename)
             imageInput = Image.open(filename) 
             splited = filename.split(".jpg")
             imageInput = Square(imageInput)
-            #imageInput = Squeeze(imageInput, 800)
             imageInput = ConverPILtoOpenCV(imageInput)
             imageInput = Blur(imageInput)
             imageInput = Binary(imageInput)

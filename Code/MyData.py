@@ -10,10 +10,6 @@ from keras import optimizers
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-if len(sys.argv) == 1:
-    print('Нет параметров для запуска!')
-    sys.exit(1)
-
 def Blur(img):
     blurBilFiltr = cv2.bilateralFilter(img, 9, 75, 75)
     return blurBilFiltr
@@ -42,19 +38,18 @@ def ConvertPILtoOpenCV(pil_image):
     return opencv_image
 
 def main():
-    dirname = "../All Images (58x2)/"   
-    loaded_model = load_model('NewModel15.h5')
-    #filename = dirname + sys.argv[1]
+    dirname = '../All Images Final/' # (58x2)
+    modelName = 'NewModel22.h5'
+    loaded_model = load_model(modelName)
     k = 0
-    while (k < 57):
-        filename = dirname + 'NotOnco_' + str(k) + '.jpg' 
+    while (k < 35):
+        filename = dirname + 'Onco_' + str(k) + '.jpg' 
         print(filename)
         k += 1
 
         splited = filename.split(".jpg")
         imageInput = Image.open(filename)
         imageInput = Square(imageInput)
-        #imageInput = Squeeze(imageInput, 128)
         imageInput = ConvertPILtoOpenCV(imageInput)
         imageInput = Blur(imageInput)
         imageInput = Binary(imageInput)

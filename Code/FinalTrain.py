@@ -8,15 +8,15 @@ from keras.callbacks import ModelCheckpoint
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-glob_dir = 'drive/My Drive/Images 299/'
+glob_dir = 'drive/My Drive/Images Train Val/'
 train_dir = glob_dir + '/train'
 val_dir = glob_dir + '/val'
 
-img_size = 299
+img_size = 128
 input_shape = (img_size, img_size, 3)
 
-epochs = 30
-batch_size = 16
+epochs = 20
+batch_size = 10
 
 nb_images = 1400
 val_data_portion = 0.2
