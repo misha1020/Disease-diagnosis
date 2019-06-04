@@ -1,0 +1,20 @@
+C:\Users\shenmay\source\repos\Disease diagnosis\Disease diagnosis\bin\Debug\Disease diagnosis.exe.config
+C:\Users\shenmay\source\repos\Disease diagnosis\Disease diagnosis\bin\Debug\Disease diagnosis.exe
+C:\Users\shenmay\source\repos\Disease diagnosis\Disease diagnosis\bin\Debug\Disease diagnosis.pdb
+C:\Users\shenmay\source\repos\Disease diagnosis\Disease diagnosis\obj\Debug\Disease diagnosis.csprojAssemblyReference.cache
+C:\Users\shenmay\source\repos\Disease diagnosis\Disease diagnosis\obj\Debug\Disease_diagnosis.FormRecognizer.resources
+C:\Users\shenmay\source\repos\Disease diagnosis\Disease diagnosis\obj\Debug\Disease_diagnosis.Properties.Resources.resources
+C:\Users\shenmay\source\repos\Disease diagnosis\Disease diagnosis\obj\Debug\Disease diagnosis.csproj.GenerateResource.cache
+C:\Users\shenmay\source\repos\Disease diagnosis\Disease diagnosis\obj\Debug\Disease diagnosis.csproj.CoreCompileInputs.cache
+C:\Users\shenmay\source\repos\Disease diagnosis\Disease diagnosis\obj\Debug\Disease diagnosis.exe
+C:\Users\shenmay\source\repos\Disease diagnosis\Disease diagnosis\obj\Debug\Disease diagnosis.pdb
+C:\Users\shenmay\Documents\GitHub\Kurs\Disease diagnosis\Disease diagnosis\bin\Debug\Disease diagnosis.exe.config
+C:\Users\shenmay\Documents\GitHub\Kurs\Disease diagnosis\Disease diagnosis\bin\Debug\Disease diagnosis.exe
+C:\Users\shenmay\Documents\GitHub\Kurs\Disease diagnosis\Disease diagnosis\bin\Debug\Disease diagnosis.pdb
+C:\Users\shenmay\Documents\GitHub\Kurs\Disease diagnosis\Disease diagnosis\obj\Debug\Disease diagnosis.csprojAssemblyReference.cache
+C:\Users\shenmay\Documents\GitHub\Kurs\Disease diagnosis\Disease diagnosis\obj\Debug\Disease_diagnosis.FormRecognizer.resources
+C:\Users\shenmay\Documents\GitHub\Kurs\Disease diagnosis\Disease diagnosis\obj\Debug\Disease_diagnosis.Properties.Resources.resources
+C:\Users\shenmay\Documents\GitHub\Kurs\Disease diagnosis\Disease diagnosis\obj\Debug\Disease diagnosis.csproj.GenerateResource.cache
+C:\Users\shenmay\Documents\GitHub\Kurs\Disease diagnosis\Disease diagnosis\obj\Debug\Disease diagnosis.csproj.CoreCompileInputs.cache
+C:\Users\shenmay\Documents\GitHub\Kurs\Disease diagnosis\Disease diagnosis\obj\Debug\Disease diagnosis.exe
+C:\Users\shenmay\Documents\GitHub\Kurs\Disease diagnosis\Disease diagnosis\obj\Debug\Disease diagnosis.pdb
