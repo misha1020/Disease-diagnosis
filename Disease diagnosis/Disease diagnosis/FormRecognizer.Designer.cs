@@ -37,11 +37,11 @@
             // 
             // btLoadPhoto
             // 
-            this.btLoadPhoto.Location = new System.Drawing.Point(12, 12);
+            this.btLoadPhoto.Location = new System.Drawing.Point(12, 61);
             this.btLoadPhoto.Name = "btLoadPhoto";
             this.btLoadPhoto.Size = new System.Drawing.Size(300, 44);
             this.btLoadPhoto.TabIndex = 0;
-            this.btLoadPhoto.Text = "Загрузить изображения";
+            this.btLoadPhoto.Text = "Загрузить изображение";
             this.btLoadPhoto.UseVisualStyleBackColor = true;
             this.btLoadPhoto.Click += new System.EventHandler(this.btLoadPhoto_Click);
             // 
@@ -66,7 +66,7 @@
             // 
             // btLoadModel
             // 
-            this.btLoadModel.Location = new System.Drawing.Point(12, 62);
+            this.btLoadModel.Location = new System.Drawing.Point(12, 11);
             this.btLoadModel.Name = "btLoadModel";
             this.btLoadModel.Size = new System.Drawing.Size(300, 44);
             this.btLoadModel.TabIndex = 3;
@@ -84,7 +84,7 @@
             this.Controls.Add(this.btRecognize);
             this.Controls.Add(this.btLoadPhoto);
             this.Name = "FormRecognizer";
-            this.Text = "Диагностика заболевай";
+            this.Text = "Диагностика заболеваний";
             ((System.ComponentModel.ISupportInitialize)(this.pbImage)).EndInit();
             this.ResumeLayout(false);
 
