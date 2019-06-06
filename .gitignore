@@ -113,20 +113,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-/Images
-/Images Cry
-/Images New
-/Images Glass
-/Images 299
 /Images Train Val
-/All Images
-/All Images 29.03 deleted
-/All Images (58x2)
 /All Images Final
-/Images Final
 /Make Onco
 /Make Not Onco
-/Models
-/Models 35
-/Test
-/Resize
+/GitIgnore
