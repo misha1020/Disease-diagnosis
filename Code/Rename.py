@@ -66,5 +66,5 @@ def Sort():
         os.rename(direc + Image, direc + currentName[0] + "_" + str(i%nb_images) + ".JPG")
         i += 1
 
-Sort()
-#Rename()
+#Sort()
+Rename()

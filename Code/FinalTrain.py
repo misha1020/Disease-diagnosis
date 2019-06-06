@@ -69,7 +69,7 @@ val_generator = datagen.flow_from_directory(
     batch_size=batch_size,
     class_mode='binary')
 
-filepath='drive/My Drive/NewModel7.h5'
+filepath='drive/My Drive/Model.h5'
 checkpoint = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, 
 save_best_only=True, mode='max')
 callbacks_list = [checkpoint]
