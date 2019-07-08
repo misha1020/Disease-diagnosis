@@ -86,7 +86,7 @@ namespace Disease_diagnosis
             else
             {
                 string result = Recognize();
-                MessageBox.Show("Результат распознавания: " + result, "Постановление диагноза", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Результат распознавания: " + result, "Постановка диагноза", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
